@@ -14,7 +14,7 @@ export const MyPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    loginState ? null : navigate('../login');
+    !loginState ? navigate('../login') : null;
   });
 
   return <div>{userState.userId} gd</div>;
