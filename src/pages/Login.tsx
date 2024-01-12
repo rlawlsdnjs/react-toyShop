@@ -1,7 +1,8 @@
 import tw from 'tailwind-styled-components';
 import { Button } from '../components/common/button';
 import { InputBtn } from '../components/common/input';
-import SignForm from '../components/sign/signForm';
+import { Explanation } from '../components/common/logoEx';
+import Form from '../components/common/Form';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
@@ -61,29 +62,21 @@ export const Login = () => {
 
   return (
     <>
-      <SignForm>
-        <LoginTop>
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign in to your account
-            </h2>
-          </div>
+      <div>
+        <Form>
+          <Explanation description="Sign in to your account" />
+
           <InputBtn
             title="Email"
             place={'example@email.com'}
-            onChange={changeId}
+            change={changeId}
             type="email"
           />
 
           <InputBtn
             title="Password"
             place={''}
-            onChange={changePw}
+            change={changePw}
             type="password"
           />
           {confirmUser ? <ConfirmUser /> : null}
@@ -93,37 +86,16 @@ export const Login = () => {
             userPw={pw}
             title={'Login'}
           ></Button>
-        </LoginTop>
-        <LoginBot>
+        </Form>
+        <Form>
           <p className="text-left block text-sm font-medium leading-6 text-gray-900 mb-2">
             Not a member?
           </p>
           <Link to={'/sign'}>
             <Button title={'SignUp'}></Button>
           </Link>
-        </LoginBot>
-      </SignForm>
+        </Form>
+      </div>
     </>
   );
 };
-
-const LoginTop = tw.div`
-    border-solid 
-    border
-    border-slate-300
-    p-8
-    mt-10 
-    sm:mx-auto 
-    sm:w-full 
-    sm:max-w-sm
-    bg-white
-`;
-
-const LoginBot = tw.div`
-    border-solid 
-    border
-    border-slate-300
-    p-8
-    bg-white
-    mt-3
-`;
