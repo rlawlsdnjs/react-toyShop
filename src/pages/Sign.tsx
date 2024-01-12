@@ -1,12 +1,12 @@
 import tw from 'tailwind-styled-components';
 import { Button } from '../components/common/button';
 import { InputBtn } from '../components/common/input';
-import SignForm from '../components/sign/signForm';
+import Form from '../components/common/Form';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import axios from 'axios';
 import { useUserData } from '../hooks/auth/putUserData';
 import { useNavigate } from 'react-router-dom';
+import { Explanation } from '../components/common/logoEx';
 
 export const Sign = () => {
   const navigate = useNavigate();
@@ -72,69 +72,39 @@ export const Sign = () => {
 
   return (
     <>
-      <SignForm>
-        <SignTop>
-          <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-            <img
-              className="mx-auto h-10 w-auto"
-              src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
-              alt="Your Company"
-            />
-            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-              Sign up to your account
-            </h2>
-          </div>
+      <div>
+        <Form>
+          <Explanation description="Sign up to your account" />
           <InputBtn
             title="Email"
             place={'전화번호, 사용자 이름 또는 이메일'}
             type="email"
-            onChange={changeId}
+            change={changeId}
           />
 
           <Button title={'Send verification code'} click={mainFn}></Button>
           {postMail ? (
             <div>
-              <InputBtn title="code" place={'code'} onChange={changeCode} />
+              <InputBtn title="code" place={'code'} change={changeCode} />
               <Button title={'Confirm code'} click={verification}></Button>
             </div>
           ) : null}
 
-          <InputBtn title="Name" place={'성명'} onChange={changeName} />
+          <InputBtn title="Name" place={'성명'} change={changeName} />
           <InputBtn
             title="Password"
             place={'비밀번호'}
             type="password"
-            onChange={changePw}
+            change={changePw}
           />
           <Button title={'SignUp'} click={signUp}></Button>
-        </SignTop>
-        <SignBot>
+        </Form>
+        <Form>
           <Link to={'/login'}>
             <Button title={'Login'}></Button>
           </Link>
-        </SignBot>
-      </SignForm>
+        </Form>
+      </div>
     </>
   );
 };
-
-const SignTop = tw.div`
-    border-solid 
-    border
-    border-slate-300
-    p-8
-    mt-10 
-    sm:mx-auto 
-    sm:w-full 
-    sm:max-w-sm
-    bg-white
-`;
-
-const SignBot = tw.div`
-    border-solid 
-    border
-    border-slate-300
-    p-8
-    bg-white
-    mt-3
-`;
