@@ -4,19 +4,31 @@ import tw from 'tailwind-styled-components';
 interface InputProps {
   title?: string;
   place: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  change?: (e: React.ChangeEvent<HTMLInputElement>) => void;
   type?: string;
+  id?: string;
+  getTitle?: (setTitle: string) => void;
 }
 export const InputBtn = (props: InputProps) => {
   return (
-    <div className="my-3">
+    <div className="my-3" title={props.title}>
       <p className="text-left block text-sm font-medium leading-6 text-gray-900">
         {props.title}
       </p>
       <LoginInput
         type={props.type}
         placeholder={props.place}
-        onChange={props.onChange}
+        onChange={props.change}
+        onFocus={() => {
+          if (props.getTitle) {
+            props.getTitle!(props.title!);
+          }
+        }}
+        onClick={() => {
+          if (props.getTitle) {
+            props.getTitle!(props.title!);
+          }
+        }}
       ></LoginInput>
     </div>
   );
