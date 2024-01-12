@@ -31,29 +31,13 @@ export const useUserData = async (array: any, type: string) => {
       };
       break;
     }
+    case '': {
+      requestData = null;
+      break;
+    }
     default:
       console.log('어떤 type인지 확인 불가');
   }
-  // if (type === 'userData') {
-  // } else if (type === 'postEmail') {
-  //   requestData = {
-  //     email: array.id,
-  //   };
-  // } else if (type === 'verificationEmail') {
-  //   requestData = {
-  //     code: array.code,
-  //     email: array.id,
-  //   };
-  // } else if (type === 'signUp') {
-  //   requestData = {
-  //     email: array.id,
-  //     password: array.newPw,
-  //     username: array.name,
-  //   };
-  //   console.log(array);
-  // } else {
-  //   return;
-  // }
 
   try {
     const response = await axios.post(array.url, requestData, {
