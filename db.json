@@ -1,0 +1,16 @@
+{
+  "products": [
+    {
+      "id": "b01a",
+      "img": "",
+      "categoryName": "신발",
+      "pdDetail": "가죽신발인데 짱좋아용ㅋ",
+      "pdName": "테스트신발",
+      "pdPrice": "13,000",
+      "pdQuantity": "30개",
+      "pdSize": "250",
+      "pdStat": "호잇!",
+      "userEmail": "wlseldrnt@naver.com"
+    }
+  ]
+}
