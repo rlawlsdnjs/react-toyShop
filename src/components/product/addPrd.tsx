@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 import { Button } from '../common/button';
 import Form from '../common/Form';
 import { InputBtn } from '../common/input';
+import { usePostAllPrdData } from '../../hooks/product/postPrd';
+import { useGetPrdData } from '../../hooks/product/getPrd';
 export const AddPrd = () => {
   const initialState = {
     categoryName: '',
@@ -36,6 +38,16 @@ export const AddPrd = () => {
   }, [data]);
   console.log(formData);
 
+  const addPrdFn = async () => {
+    const addPrd = await usePostAllPrdData(formData);
+  };
+
+  const gd = async () => {
+    const res = await useGetPrdData();
+    console.log(res);
+  };
+  gd();
+
   return (
     <Form>
       {Object.keys(initialState).map((i, idx) => {
@@ -49,10 +61,7 @@ export const AddPrd = () => {
           ></InputBtn>
         );
       })}
-      <Button
-        //   click={LoginFn}
-        title={'Add product'}
-      ></Button>
+      <Button click={addPrdFn} title={'Add product'}></Button>
     </Form>
   );
 };
