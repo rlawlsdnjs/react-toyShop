@@ -6,7 +6,7 @@ import { useGetUserData } from './hooks/auth/getUserData';
 import { useEffect } from 'react';
 import { Header } from './layout/header';
 import { Login } from './pages/Login';
-import { useUserData } from './hooks/auth/putUserData';
+import { useUserData } from './hooks/auth/postUserData';
 
 export const Home = () => {
   const [loginState, setLoginState] = useRecoilState(LoginState);
@@ -18,6 +18,7 @@ export const Home = () => {
   const id = localStorage.getItem('userId');
   const pw = localStorage.getItem('userPw');
 
+  // 자동 로그인
   const autoSign = async () => {
     setLoginState(true);
     setUserInfo({
