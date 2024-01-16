@@ -7,7 +7,7 @@ import { LoginState, User, UserProfile } from '../recoil/sign/atoms/loginState';
 
 import { Button } from '../components/common/button';
 import { useEffect } from 'react';
-import { useUserData } from '../hooks/auth/putUserData';
+import { useUserData } from '../hooks/auth/postUserData';
 
 export const Header = () => {
   const useLoginState = useRecoilValue(LoginState);

@@ -4,7 +4,7 @@ import { InputBtn } from '../components/common/input';
 import Form from '../components/common/Form';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import { useUserData } from '../hooks/auth/putUserData';
+import { useUserData } from '../hooks/auth/postUserData';
 import { useNavigate } from 'react-router-dom';
 import { Explanation } from '../components/common/logoEx';
 
@@ -32,7 +32,7 @@ export const Sign = () => {
     setCode(e.target.value);
   };
 
-  const mainFn = async () => {
+  const mailFn = async () => {
     const url = 'http://192.168.50.26:8096/api/send-verification-email';
 
     let id = newId;
@@ -82,7 +82,7 @@ export const Sign = () => {
             change={changeId}
           />
 
-          <Button title={'Send verification code'} click={mainFn}></Button>
+          <Button title={'Send verification code'} click={mailFn}></Button>
           {postMail ? (
             <div>
               <InputBtn title="code" place={'code'} change={changeCode} />

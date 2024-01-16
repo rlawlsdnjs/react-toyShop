@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { ConfirmUser } from '../components/sign/confirmUser';
-import { useUserData } from '../hooks/auth/putUserData';
+import { useUserData } from '../hooks/auth/postUserData';
 import {
   LoginSession,
   LoginState,
