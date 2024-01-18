@@ -6,19 +6,27 @@ import { useRecoilValue, useRecoilState, useResetRecoilState } from 'recoil';
 import { LoginState, User, UserProfile } from '../recoil/sign/atoms/loginState';
 
 import { Button } from '../components/common/button';
-import { useEffect } from 'react';
 import { useUserData } from '../hooks/auth/postUserData';
-import { useRef } from 'react';
 import { HeaderH } from '../recoil/common/common';
+import { useLayoutEffect } from 'react';
 import React from 'react';
 import styled from 'styled-components';
+import { useRef } from 'react';
+import { forwardRef } from 'react';
+import { ComponentProps } from 'react';
 export const Header = () => {
-  const headHeight = React.useRef<any>();
+  const headHeight = useRef<HTMLDivElement>(null);
   const [headerHeight, setHeaderHeight] = useRecoilState(HeaderH);
-
-  useEffect(() => {
-    setHeaderHeight(headHeight.current.offsetHeight);
+  const RefHeader = forwardRef((props: ComponentProps<any>, ref) => {
+    return <HeaderSection ref={ref} {...props}></HeaderSection>;
+  });
+  useLayoutEffect(() => {
+    if (headHeight.current) {
+      const height = headHeight.current.offsetHeight;
+      setHeaderHeight(String(height));
+    }
   }, []);
+
   const useLoginState = useRecoilValue(LoginState);
   const userState = useRecoilValue(User);
   const resetLoginState = useResetRecoilState(LoginState);
@@ -28,7 +36,6 @@ export const Header = () => {
 
   const logoutFn = async () => {
     const url = 'http://192.168.50.26:8096/api/logout';
-
     const type = '';
     let array = { url };
     const logoutPut = await useUserData(array, type);
@@ -46,7 +53,7 @@ export const Header = () => {
   };
 
   return (
-    <HeaderSection ref={headHeight}>
+    <RefHeader ref={headHeight}>
       <div>
         <Link to="/">
           <h1>
@@ -63,8 +70,10 @@ export const Header = () => {
           {useLoginState ? (
             <>
               <HeaderListItem>
-                {profile.name}
-                <span>님</span>
+                <p>
+                  {profile.name}
+                  <span>님</span>
+                </p>
               </HeaderListItem>
               <HeaderListItem>
                 <Link
@@ -125,10 +134,22 @@ export const Header = () => {
           </HeaderListItem>
         </ul>
       </div>
-    </HeaderSection>
+    </RefHeader>
   );
 };
-const HeaderSection = tw.header`
+
+const StyledHeader = styled.div`
+  & a {
+    background: transparent;
+  }
+  & button {
+    background: transparent;
+  }
+  & p {
+    color: white;
+  }
+` as React.FC<React.HTMLAttributes<HTMLDivElement>>;
+const HeaderSection = tw(StyledHeader)`
     w-full
     flex
     justify-between
@@ -137,11 +158,10 @@ const HeaderSection = tw.header`
     border-b
     border-black
     border-solid
-    bg-white
+    bg-black
     sticky
     top-0
     z-50
-  
 `;
 const StyledListItem = styled.li`
   a {
