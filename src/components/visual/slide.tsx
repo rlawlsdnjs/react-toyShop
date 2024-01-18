@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 
-import { Autoplay, EffectCube, Pagination } from 'swiper/modules';
+import { Autoplay, EffectCube, Navigation, Pagination } from 'swiper/modules';
 import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
@@ -12,9 +12,30 @@ import { HeaderH } from '../../recoil/common/common';
 import img from '../../../public/circle_bg.png';
 import { keyframes } from 'styled-components';
 import { SlideTitle } from './slideTitle';
+import { useState } from 'react';
+import { Button } from '../common/button';
 export const Slide = () => {
   const headerH = Number(useRecoilValue(HeaderH));
   const bgImg = img;
+  const [isAutoplayPaused, setIsAutoplayPaused] = useState(false);
+
+  const toggleAutoplay = () => {
+    setIsAutoplayPaused((prev) => !prev);
+    isAutoplayPaused ? playSlide() : pauseSlide();
+  };
+  const [swiperRef, setSwiperRef] = useState<{} | any>(null);
+  const playSlide = () => {
+    swiperRef?.autoplay.start();
+  };
+  const pauseSlide = () => {
+    swiperRef?.autoplay.stop();
+  };
+  const prevSlide = () => {
+    swiperRef?.slidePrev();
+  };
+  const nextSlide = () => {
+    swiperRef?.slideNext();
+  };
   return (
     <SlideSection>
       <StickyWrap headerHeight={headerH}>
@@ -22,6 +43,7 @@ export const Slide = () => {
           <BgImg src={bgImg} />
         </BgWrap>
         <Swiper
+          onSwiper={setSwiperRef}
           effect={'cube'}
           grabCursor={true}
           cubeEffect={{
@@ -36,13 +58,14 @@ export const Slide = () => {
           }}
           loop={true}
           pagination={true}
-          // modules={[Autoplay, EffectCube, Pagination]}
-          modules={[EffectCube, Pagination]}
+          navigation={true}
+          modules={[Autoplay, EffectCube, Navigation]}
+          // modules={[EffectCube, Pagination]}
           className="mySwiper"
         >
           <SwiperSlide>
             <div>
-              <SlideTitle title={'Friendly Eco'}></SlideTitle>
+              <SlideTitle title={'Eco \n Friendly'}></SlideTitle>
             </div>
           </SwiperSlide>
           <SwiperSlide>
@@ -55,6 +78,13 @@ export const Slide = () => {
             <div></div>
           </SwiperSlide>
         </Swiper>
+        <SlideController>
+          <button onClick={prevSlide}>이전</button>
+          <button onClick={toggleAutoplay}>
+            {isAutoplayPaused ? 'Play' : 'Pause'}
+          </button>
+          <button onClick={nextSlide}>다음</button>
+        </SlideController>
       </StickyWrap>
     </SlideSection>
   );
@@ -111,4 +141,20 @@ const SlideSection = tw(StyledSlideSection)`
 w-2/5
 box-border
 
+`;
+
+const SlideController = styled.div`
+  position: absolute;
+  z-index: 40;
+  bottom: 30px;
+  right: 0;
+  width: 100%;
+  box-sizing: border-box;
+  & > button {
+    padding: 0;
+    margin: 0;
+    border-radius: 0;
+  }
+  & > button:last-child {
+  }
 `;
