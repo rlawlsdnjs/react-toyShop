@@ -8,8 +8,17 @@ import { LoginState, User, UserProfile } from '../recoil/sign/atoms/loginState';
 import { Button } from '../components/common/button';
 import { useEffect } from 'react';
 import { useUserData } from '../hooks/auth/postUserData';
-
+import { useRef } from 'react';
+import { HeaderH } from '../recoil/common/common';
+import React from 'react';
+import styled from 'styled-components';
 export const Header = () => {
+  const headHeight = React.useRef<any>();
+  const [headerHeight, setHeaderHeight] = useRecoilState(HeaderH);
+
+  useEffect(() => {
+    setHeaderHeight(headHeight.current.offsetHeight);
+  }, []);
   const useLoginState = useRecoilValue(LoginState);
   const userState = useRecoilValue(User);
   const resetLoginState = useResetRecoilState(LoginState);
@@ -37,7 +46,7 @@ export const Header = () => {
   };
 
   return (
-    <HeaderSection>
+    <HeaderSection ref={headHeight}>
       <div>
         <Link to="/">
           <h1>
@@ -60,7 +69,24 @@ export const Header = () => {
               <HeaderListItem>
                 <Link
                   to={'my'}
-                  className="rounded-md p-2 flex  w-full  text-sm  font-semibold  justify-center  bg-white  px-3  py-1.5  leading-6 text-indigo-500 shadow-sm  hover:bg-indigo-500 hover:text-white  focus-visible:outline  focus-visible:outline-2  focus-visible:outline-offset-2  focus-visible:outline-indigo-600"
+                  className="    
+                  rounded-md
+                  bg-slate-800
+                  w-full
+                  flex 
+                  justify-center 
+                  px-3 
+                  py-2
+                  text-sm 
+                  font-semibold 
+                  leading-6 
+                  text-white 
+                  shadow-sm 
+                  hover:bg-indigo-500 
+                  focus-visible:outline 
+                  focus-visible:outline-2 
+                  focus-visible:outline-offset-2 
+                  focus-visible:outline-indigo-600"
                 >
                   Mypage
                 </Link>
@@ -72,7 +98,24 @@ export const Header = () => {
             {!useLoginState ? (
               <Link
                 to="/login"
-                className="rounded-md p-2 flex  w-full  justify-center  bg-indigo-600  px-3  py-1.5  text-sm  font-semibold  leading-6 text-white shadow-sm  hover:bg-indigo-500 hover:text-white  focus-visible:outline  focus-visible:outline-2  focus-visible:outline-offset-2  focus-visible:outline-indigo-600"
+                className="    
+                rounded-md
+                bg-slate-800
+                flex 
+                w-full 
+                justify-center 
+                px-3 
+                py-2
+                text-sm 
+                font-semibold 
+                leading-6 
+                text-white 
+                shadow-sm 
+                hover:bg-indigo-500 
+                focus-visible:outline 
+                focus-visible:outline-2 
+                focus-visible:outline-offset-2 
+                focus-visible:outline-indigo-600"
               >
                 Login
               </Link>
@@ -86,18 +129,28 @@ export const Header = () => {
   );
 };
 const HeaderSection = tw.header`
-    fixed
     w-full
-    h-5
-    left-0
-    top-0
     flex
     justify-between
     px-9
     py-3
+    border-b
+    border-black
+    border-solid
+    bg-white
+    sticky
+    top-0
+    z-50
+  
 `;
-
-const HeaderListItem = tw.li`
+const StyledListItem = styled.li`
+  a {
+    -webkit-text-stroke: 0.5px #fff;
+    color: transparent;
+    font-size: 18px;
+  }
+`;
+const HeaderListItem = tw(StyledListItem)`
   flex
   items-center
   ml-5
