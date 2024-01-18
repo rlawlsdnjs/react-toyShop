@@ -8,6 +8,9 @@ import { Home } from './Home';
 import { Suspense } from 'react';
 import { Loading } from './components/common/loading';
 import { Admin } from './pages/Admin';
+import { Wrap } from './components/common/wrap';
+import { Visual } from './layout/visual';
+import { Footer } from './layout/footer';
 
 function App() {
   return (
@@ -15,11 +18,17 @@ function App() {
       <Suspense fallback={<Loading />}>
         <Home />
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/sign" element={<Sign />} />
-          <Route path="/my" element={<MyPage />} />
-          <Route path="/admin" element={<Admin />} />
+          <Route path="/" element={<Visual></Visual>}></Route>
         </Routes>
+        <Wrap>
+          <Routes>
+            <Route path="/login" element={<Login />} />
+            <Route path="/sign" element={<Sign />} />
+            <Route path="/my" element={<MyPage />} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </Wrap>
+        <Footer></Footer>
       </Suspense>
     </RecoilRoot>
   );

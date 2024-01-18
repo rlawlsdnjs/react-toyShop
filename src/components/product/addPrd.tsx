@@ -6,6 +6,7 @@ import { usePostAllPrdData } from '../../hooks/product/postPrd';
 import { useGetPrdData } from '../../hooks/product/getPrd';
 export const AddPrd = () => {
   const initialState = {
+    imgUrl: '',
     categoryName: '',
     pdDetail: '',
     pdName: '',
@@ -42,11 +43,7 @@ export const AddPrd = () => {
     const addPrd = await usePostAllPrdData(formData);
   };
 
-  const gd = async () => {
-    const res = await useGetPrdData();
-    console.log(res);
-  };
-  gd();
+  console.log(formData);
 
   return (
     <Form>

@@ -1,4 +1,5 @@
 import tw from 'tailwind-styled-components';
+import styled from 'styled-components';
 
 interface TitleProps {
   title?: string;
@@ -11,18 +12,21 @@ export const Button = ({ title, userId, userPw, click }: TitleProps) => {
   return <Btn onClick={click}>{title}</Btn>;
 };
 
-const Btn = tw.button`
+const StyledBtn = styled.button`
+  -webkit-text-stroke: 1px #dadada;
+  color: transparent;
+  font-size: 20px;
+`;
+const Btn = tw(StyledBtn)`
     rounded-md
-    bg-cyan-400
-    p-2
+    bg-slate-800
     w-full
     flex 
     w-full 
     justify-center 
     rounded-md 
-    bg-indigo-600 
     px-3 
-    py-1.5 
+    py-3
     text-sm 
     font-semibold 
     leading-6 
