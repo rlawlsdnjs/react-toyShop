@@ -3,9 +3,14 @@ import { useGetPrdData } from '../../hooks/product/getPrd';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { useRecoilValue } from 'recoil';
-import { Products, FilterPrd } from '../../recoil/products/atoms/products';
+import {
+  Products,
+  FilterPrd,
+  SelectCategory,
+} from '../../recoil/products/atoms/products';
 import styled from 'styled-components';
 import { PrdCategory } from '../product/category';
+import { Button } from '../common/button';
 interface IntPrdData {
   categoryName: string;
   id: string;
@@ -20,15 +25,32 @@ interface IntPrdData {
 }
 export const VisualPrd = () => {
   const prdData = useRecoilValue<IntPrdData[]>(FilterPrd);
+  const selectedCate = useRecoilValue(SelectCategory);
+  const itemsShow = 4;
+  const itemsToLoad = 4;
+
+  const [displayedItems, setDisplayedItems] = useState<IntPrdData[]>([]);
+  const [loadMoreCount, setLoadMoreCount] = useState(itemsShow);
+
   useEffect(() => {
-    console.log(prdData);
-  }, []);
+    setLoadMoreCount(itemsShow);
+    const slicedData = prdData.slice(0, loadMoreCount);
+    setDisplayedItems(slicedData);
+  }, [selectedCate]);
+
+  useEffect(() => {
+    setDisplayedItems(prdData.slice(0, loadMoreCount));
+  }, [prdData, loadMoreCount]);
+
+  const handleLoadMore = () => {
+    setLoadMoreCount(loadMoreCount + itemsToLoad);
+  };
   return (
     <>
       <VisualAllWrap>
         <PrdCategory />
         <VisualProduct>
-          {prdData.map((i) => {
+          {displayedItems.map((i) => {
             return (
               <VisualPrdItem key={i.id}>
                 <VisualPrdItemChild>
@@ -42,12 +64,18 @@ export const VisualPrd = () => {
             );
           })}
         </VisualProduct>
+        {loadMoreCount < prdData.length && (
+          <ViewMoreSection>
+            <Button click={handleLoadMore} title="View more"></Button>
+          </ViewMoreSection>
+        )}
       </VisualAllWrap>
     </>
   );
 };
+
 const VisualAllWrap = tw.div`
-  w-full
+  w-3/5
 `;
 const VisualStyledPrd = styled.ul`
   width: 100%;
@@ -86,4 +114,14 @@ const PrdName = styled.h3`
   -webkit-text-stroke: 0.7px #000;
   color: transparent;
   font-size: 25px;
+`;
+const ViewMoreSection = styled.div`
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-top: 1px solid #000;
+  > button {
+    max-width: 200px;
+  }
 `;
