@@ -8,5 +8,6 @@ const Title = styled.h2`
   -webkit-text-stroke: 3px #585858;
   color: transparent;
   line-height: 0.9;
-  font-size: 8vw;
+  font-size: 6vw;
+  white-space: pre-line;
 `;
