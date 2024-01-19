@@ -1,6 +1,6 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true },
+  env: { browser: true, es2020: true, jest: true, module: 'current' },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -27,4 +27,12 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['tests/**/*'],
+      env: {
+        jest: true,
+      },
+    },
+  ],
 };
