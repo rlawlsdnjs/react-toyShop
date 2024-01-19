@@ -4,7 +4,7 @@ import { Login } from './pages/Login';
 import { Sign } from './pages/Sign';
 import { RecoilRoot } from 'recoil';
 import { MyPage } from './pages/Mypage';
-import { Home } from './Home';
+import { Home } from './pages/Home';
 import { Suspense } from 'react';
 import { Loading } from './components/common/loading';
 import { Admin } from './pages/Admin';
