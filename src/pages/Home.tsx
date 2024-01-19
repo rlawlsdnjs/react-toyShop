@@ -1,12 +1,12 @@
-import './App.css';
+import '../App.css';
 import { useRecoilValue } from 'recoil';
-import { User, LoginState, UserProfile } from './recoil/sign/atoms/loginState';
+import { User, LoginState, UserProfile } from '../recoil/sign/atoms/loginState';
 import { useRecoilState } from 'recoil';
-import { useGetUserData } from './hooks/auth/getUserData';
+import { useGetUserData } from '../hooks/auth/getUserData';
 import { useEffect } from 'react';
-import { Header } from './layout/header';
-import { Login } from './pages/Login';
-import { useUserData } from './hooks/auth/postUserData';
+import { Header } from '../layout/header';
+import { Login } from './Login';
+import { useUserData } from '../hooks/auth/postUserData';
 
 export const Home = () => {
   const [loginState, setLoginState] = useRecoilState(LoginState);
