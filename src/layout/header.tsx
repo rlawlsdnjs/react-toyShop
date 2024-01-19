@@ -16,7 +16,7 @@ import { forwardRef } from 'react';
 import { ComponentProps } from 'react';
 export const Header = () => {
   const headHeight = useRef<HTMLDivElement>(null);
-  const [headerHeight, setHeaderHeight] = useRecoilState(HeaderH);
+  const [headerheight, setHeaderHeight] = useRecoilState(HeaderH);
   const RefHeader = forwardRef((props: ComponentProps<any>, ref) => {
     return <HeaderSection ref={ref} {...props}></HeaderSection>;
   });
@@ -26,6 +26,7 @@ export const Header = () => {
       setHeaderHeight(String(height));
     }
   }, []);
+  console.log(headerheight);
 
   const useLoginState = useRecoilValue(LoginState);
   const userState = useRecoilValue(User);

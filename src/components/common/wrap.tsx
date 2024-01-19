@@ -12,18 +12,18 @@ interface WrapInt {
 export const Wrap: React.FC<WrapInt> = ({ children }) => {
   const headerH = Number(useRecoilValue(HeaderH));
 
-  console.log(typeof headerH);
+  console.log(headerH);
   return (
-    <StyledAllWrap headerHeight={headerH}>
+    <StyledAllWrap headerheight={headerH}>
       <div>{children}</div>
     </StyledAllWrap>
   );
 };
 interface StyledAllWrapProps {
-  headerHeight: number;
+  headerheight: number;
 }
 const StyledAllWrap = styled.div<StyledAllWrapProps>`
-  height: ${({ headerHeight }) => `calc(100vh - ${headerHeight}px)`};
+  height: ${({ headerheight }) => `calc(100vh - ${headerheight}px)`};
   display: flex;
   place-items: center;
   justify-content: center;

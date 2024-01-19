@@ -13,7 +13,6 @@ export const PrdCategory = () => {
   const headerH = Number(useRecoilValue(HeaderH));
   const firstCategory = useRecoilValue(FirstCate);
   const [selectCategory, setSelectCategory] = useRecoilState(SelectCategory);
-  console.log(selectCategory);
 
   const changeCategory = (e: React.MouseEvent<HTMLLIElement>) => {
     const newCategory = e.currentTarget.title;
@@ -24,7 +23,7 @@ export const PrdCategory = () => {
     }
   };
   return (
-    <CategoryWrap headerHeight={headerH}>
+    <CategoryWrap headerheight={headerH}>
       <ul>
         {cateName.map((i) => {
           return (
@@ -43,18 +42,18 @@ export const PrdCategory = () => {
   );
 };
 interface StyledStickyVisualProps {
-  headerHeight: number;
+  headerheight: number;
 }
 
 const StyledCateWrap = styled.div<StyledStickyVisualProps>`
   position: sticky;
-  top: ${({ headerHeight }) => `calc( ${headerHeight}px)`};
+  top: ${({ headerheight }) => `calc( ${headerheight}px)`};
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(3px);
   -webkit-text-stroke: 1px #000;
   color: transparent;
   font-size: 30px;
-  z-index: 99;
+  z-index: 40;
   > ul {
     display: flex;
     justify-content: center;
