@@ -1,6 +1,12 @@
 module.exports = {
   root: true,
-  env: { browser: true, es2020: true, jest: true, module: 'current' },
+  env: {
+    browser: true,
+    es6: true,
+    es2020: true,
+    node: true,
+    jest: true,
+  },
   extends: [
     'eslint:recommended',
     'plugin:react/recommended',
@@ -13,11 +19,12 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: ['react-refresh', 'react', '@typescript-eslint'],
   rules: {
+    'no-warning-rule': 'off',
     'react-refresh/only-export-components': [
       'warn',
       { allowConstantExport: true },
     ],
-    'react/jsx-filename-extension': ['warn', { extentions: ['tsx'] }],
+    'react/jsx-filename-extension': ['warn', { extensions: ['tsx', 'jsx'] }],
     'import/extensions': [
       'error',
       'ignorePackages',
