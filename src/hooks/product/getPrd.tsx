@@ -1,6 +1,7 @@
 import axios from 'axios';
+
 export const useGetPrdData = async () => {
-  let url = `http://localhost:3001/products`;
+  const url = `http://localhost:3001/products`;
   try {
     const response = await axios.get(url);
 

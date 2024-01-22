@@ -1,20 +1,20 @@
-import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import tw from 'tailwind-styled-components';
 import { useRecoilValue, useRecoilState, useResetRecoilState } from 'recoil';
+import styled from 'styled-components';
+import React, {
+  useLayoutEffect,
+  useRef,
+  forwardRef,
+  ComponentProps,
+} from 'react';
 import { LoginState, User, UserProfile } from '../recoil/sign/atoms/loginState';
-
 import { Button } from '../components/common/button';
 import { useUserData } from '../hooks/auth/postUserData';
 import { HeaderH } from '../recoil/common/common';
-import { useLayoutEffect } from 'react';
-import React from 'react';
-import styled from 'styled-components';
-import { useRef } from 'react';
-import { forwardRef } from 'react';
-import { ComponentProps } from 'react';
-export const Header = () => {
+
+export function Header() {
   const headHeight = useRef<HTMLDivElement>(null);
   const [headerheight, setHeaderHeight] = useRecoilState(HeaderH);
   const RefHeader = forwardRef((props: ComponentProps<any>, ref) => {
@@ -137,7 +137,7 @@ export const Header = () => {
       </div>
     </RefHeader>
   );
-};
+}
 
 const StyledHeader = styled.div`
   & a {

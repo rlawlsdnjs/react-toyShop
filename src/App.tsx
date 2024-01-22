@@ -1,11 +1,11 @@
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { RecoilRoot } from 'recoil';
+import { Suspense } from 'react';
 import { Login } from './pages/Login';
 import { Sign } from './pages/Sign';
-import { RecoilRoot } from 'recoil';
 import { MyPage } from './pages/Mypage';
 import { Home } from './pages/Home';
-import { Suspense } from 'react';
 import { Loading } from './components/common/loading';
 import { Admin } from './pages/Admin';
 import { Wrap } from './components/common/wrap';
