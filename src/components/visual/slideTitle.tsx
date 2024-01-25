@@ -5,9 +5,12 @@ export const SlideTitle = ({ title }: any) => {
 };
 
 const Title = styled.h2`
-  -webkit-text-stroke: 3px #585858;
+  -webkit-text-stroke: 3px #000;
   color: transparent;
   line-height: 0.9;
-  font-size: 6vw;
+  font-size: 13vw;
   white-space: pre-line;
+  @media screen and (min-width: 1024px) {
+    font-size: 6vw;
+  }
 `;

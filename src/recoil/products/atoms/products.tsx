@@ -11,9 +11,9 @@ interface IntPrdData {
   pdStat: string;
   userEmail: string;
 }
-export const Products: RecoilValue<IntPrdData[]> = atom({
+export const Products = atom({
   key: 'ProductsState',
-  default: [],
+  default: [] as IntPrdData[],
 });
 
 export const Category = selector({

@@ -20,7 +20,7 @@ export const Visual = () => {
     };
 
     getData();
-  }, []);
+  }, [setPrdData]);
   return (
     <div>
       <VisualSection>
@@ -33,7 +33,8 @@ export const Visual = () => {
 };
 
 const VisualSection = tw.div`
-flex
+md:block
+lg:flex
 items-stretch
 border-b
 border-black

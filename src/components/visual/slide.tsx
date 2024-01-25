@@ -4,13 +4,7 @@ import 'swiper/css';
 import 'swiper/css/effect-cube';
 import 'swiper/css/pagination';
 
-import {
-  Autoplay,
-  EffectCube,
-  EffectCreative,
-  Navigation,
-  Pagination,
-} from 'swiper/modules';
+import { Autoplay, EffectCube, Navigation } from 'swiper/modules';
 import tw from 'tailwind-styled-components';
 import styled from 'styled-components';
 import { useRecoilValue } from 'recoil';
@@ -60,7 +54,7 @@ export const Slide = () => {
             shadowScale: 0.1,
           }}
           autoplay={{
-            delay: 4000,
+            delay: 5000,
             disableOnInteraction: false,
           }}
           loop={true}
@@ -81,7 +75,9 @@ export const Slide = () => {
             </div>
           </SwiperSlide>
           <SwiperSlide>
-            <div></div>
+            <div>
+              <SlideTitle title={'Sustainable \n Growth'}></SlideTitle>
+            </div>
           </SwiperSlide>
         </Swiper>
         <SlideController>
@@ -128,7 +124,7 @@ const BgImg = styled.img`
   animation: ${rotate} 10s linear infinite;
 `;
 
-const StickyWrap = styled.div<StyledStickyVisualProps>`
+const StyledStickyWrap = styled.div<StyledStickyVisualProps>`
   position: sticky;
   top: ${({ headerheight }) => `calc( ${headerheight}px)`};
   height: ${({ headerheight }) => `calc(100vh - ${headerheight}px)`};
@@ -139,16 +135,21 @@ const StickyWrap = styled.div<StyledStickyVisualProps>`
   box-sizing: unset;
   margin-top: -65px;
   overflow: hidden;
-  border-right: 1px solid #000;
   & .swiper-slide {
     display: flex;
     justify-content: center;
     align-items: center;
   }
 `;
+
+const StickyWrap = tw(StyledStickyWrap)`
+lg:border-r solid border-black
+`;
+
 const StyledSlideSection = styled.div``;
 const SlideSection = tw(StyledSlideSection)`
-w-2/5
+lg:w-2/5
+md:w-full
 box-border
 
 `;
@@ -160,11 +161,12 @@ const SlideController = styled.div`
   right: 0;
   width: 100%;
   box-sizing: border-box;
+  min-width: 50px;
   & > button {
     padding: 0;
     margin: 0;
     border-radius: 0;
-    font-size: 3vw;
+    font-size: 50px;
     opacity: 0.2;
   }
   & > button:last-child {

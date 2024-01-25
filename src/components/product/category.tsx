@@ -7,13 +7,13 @@ import {
 import tw from 'tailwind-styled-components';
 import { HeaderH } from '../../recoil/common/common';
 import styled from 'styled-components';
-import React from 'react';
+import React, { useRef } from 'react';
 export const PrdCategory = () => {
   const cateName = useRecoilValue(Category);
   const headerH = Number(useRecoilValue(HeaderH));
   const firstCategory = useRecoilValue(FirstCate);
   const [selectCategory, setSelectCategory] = useRecoilState(SelectCategory);
-
+  const cateRef = useRef(null);
   const changeCategory = (e: React.MouseEvent<HTMLLIElement>) => {
     const newCategory = e.currentTarget.title;
 
@@ -21,10 +21,17 @@ export const PrdCategory = () => {
     if (selectCategory !== newCategory) {
       setSelectCategory(newCategory);
     }
+    window.scrollTo({
+      top: cateRef.current.offsetParent.offsetTop - headerH,
+      behavior: 'smooth',
+    });
+    // useEffect 사용하여 카테값변경될 때 마다 수행 할 수 있게 refactor
+    console.log(cateRef);
   };
+
   return (
     <CategoryWrap headerheight={headerH}>
-      <ul>
+      <ul ref={cateRef}>
         {cateName.map((i) => {
           return (
             <CateListItem
