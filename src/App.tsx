@@ -11,6 +11,7 @@ import { Admin } from './pages/Admin';
 import { Wrap } from './components/common/wrap';
 import { Visual } from './layout/visual';
 import { Footer } from './layout/footer';
+import { Detail } from './pages/Detail';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
             <Route path="/sign" element={<Sign />} />
             <Route path="/my" element={<MyPage />} />
             <Route path="/admin" element={<Admin />} />
+            <Route path="/detail/:id" element={<Detail />} />
           </Routes>
         </Wrap>
         <Footer></Footer>

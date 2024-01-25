@@ -11,6 +11,7 @@ import {
 import styled from 'styled-components';
 import { PrdCategory } from '../product/category';
 import { Button } from '../common/button';
+import { Link } from 'react-router-dom';
 interface IntPrdData {
   categoryName: string;
   id: string;
@@ -45,6 +46,7 @@ export const VisualPrd = () => {
   const handleLoadMore = () => {
     setLoadMoreCount(loadMoreCount + itemsToLoad);
   };
+
   return (
     <>
       <VisualAllWrap>
@@ -53,13 +55,16 @@ export const VisualPrd = () => {
           {displayedItems.map((i) => {
             return (
               <VisualPrdItem key={i.id}>
-                <VisualPrdItemChild>
-                  <img src={`${i.imgUrl}`} alt="product image" />
-                  <PrdDescription>
-                    <PrdName>{i.pdName}</PrdName>
-                    <span>{i.pdDetail}</span>
-                  </PrdDescription>
-                </VisualPrdItemChild>
+                <Link to={`detail/:${i.id}`} state={{ products: i }}>
+                  <VisualPrdItemChild>
+                    <img src={`${i.imgUrl}`} alt="product image" />
+                    <PrdDescription>
+                      <PrdName>{i.pdName}</PrdName>
+                      <b>{i.pdPrice}</b>
+                      <p>{i.pdDetail}</p>
+                    </PrdDescription>
+                  </VisualPrdItemChild>
+                </Link>
               </VisualPrdItem>
             );
           })}
@@ -75,15 +80,20 @@ export const VisualPrd = () => {
 };
 
 const VisualAllWrap = tw.div`
-  w-3/5
+  lg:w-3/5
+  md:w-full
 `;
 const VisualStyledPrd = styled.ul`
   width: 100%;
+
   column-count: 2;
   column-gap: 0;
   column-rule: 1px solid #000;
   position: relative;
   top: -1px;
+  @media screen and (max-width: 768px) {
+    column-count: unset;
+  }
 `;
 const VisualProduct = tw(VisualStyledPrd)``;
 
@@ -98,6 +108,7 @@ const VisualPrdItemChild = styled.div`
   text-align: -webkit-center;
   > img {
     max-width: 250px;
+    width: 100%;
   }
 `;
 
